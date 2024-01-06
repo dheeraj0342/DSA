@@ -4,24 +4,19 @@ import java.util.Arrays;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        int[] arr ={-1,4,4,2,1};
-        selectionSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
-    public static void selectionSort(int[] arr){
+        int [] arr = {1,6,3,2,4};
         int n = arr.length;
-        for (int i = 0; i < n-1; i++) {
-            int min = arr[i];
-            int idx = i;
-            for (int j = i+1; j <=n-1 ; j++) {
-                if(arr[j] < min){
-                    min = arr[j];
-                    idx = j;
+        for(int i=n-1;i>=0;i--){
+            int maxId=0;
+            for (int j = 1; j <=i ; j++) {
+                if (arr[j] > arr[maxId]) {
+                    maxId =j;
                 }
+                int temp = arr[i];
+                arr[i] = arr[maxId];
+                arr[maxId] = temp;
             }
-            int temp = arr[i];
-            arr[i] = arr[idx];
-            arr[idx] = temp;
         }
+        System.out.println(Arrays.toString(arr));
     }
 }

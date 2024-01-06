@@ -2,51 +2,60 @@ package com.dheeraj.DSA.Sorting;
 
 import java.util.Arrays;
 
-
+// Time Complexity : O(NlogN)
+// Space Complexity :O(N)
 public class MergeSort {
     public static void main(String[] args) {
-        int[] arr = {5,4,3,2,1};
-        int[] ans = mergeSort(arr);
-        System.out.println(Arrays.toString(ans));
+        int [] arr ={9,8,7,3,6,4,15,0,10};
+        int n =arr.length;
+        sort(arr,0,n-1);
+        System.out.println(Arrays.toString(arr));
     }
-    public static int[] mergeSort(int[] arr){
-        if(arr.length ==1)
-            return arr;
 
-        int mid = arr.length/2;
-        int[] left = mergeSort(Arrays.copyOfRange(arr,0,mid));
-        int[] right = mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
-
-        return merge(left,right);
-
+    public static void sort(int[] arr , int start , int end){
+        if(start == end){
+            return;
+        }
+        int mid = (start + end)/2;
+        sort(arr,start,mid);
+        sort(arr,mid+1,end);
+        merge(arr,start,mid,end);
     }
-    private static int[] merge(int[] left , int[] right){
-        int[] mergeArr = new int[left.length + right.length];
-        int i=0;
-        int j=0;
-        int k=0;
+    public static void merge(int[] arr,int start, int mid , int end){
+        int i=0,j=0;
+        int n = mid-start+1;
+        int m = end - mid;
+        int [] left = new int[n];
+        int[] right = new int[m];
 
-        while(i< left.length & j < right.length){
+        for (int k = 0; k < n; k++) {
+            left[k] = arr[start+k];
+        }
+        for (int k = 0; k < m; k++) {
+            right[k] = arr[mid+1+k];
+        }
+        int k=start;
+        while(i<n && j<m){
             if(left[i] < right[j]){
-                mergeArr[k] = left[i];
+                arr[k] = left[i];
                 i++;
             }
             else{
-                mergeArr[k] = right[j];
+                arr[k] = right[j];
                 j++;
             }
             k++;
         }
-        while(i < left.length){
-            mergeArr[k] = left[i];
+        while(i<n){
+            arr[k] = left[i];
             i++;
             k++;
         }
-        while(j < right.length){
-            mergeArr[k] = right[j];
+        while(j<m){
+            arr[k] = right[j];
             j++;
             k++;
         }
-        return mergeArr;
     }
+
 }
