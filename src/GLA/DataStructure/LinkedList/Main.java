@@ -1,0 +1,12 @@
+package GLA.DataStructure.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList ll = new LinkedList();
+        ll.addLast(10);
+        ll.addLast(20);
+        ll.addFirst(0);
+        ll.add(2,1);
+        ll.display();
+    }
+}
