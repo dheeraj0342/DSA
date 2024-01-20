@@ -50,6 +50,12 @@ public class LinkedList {
         node.next = temp.next;
         temp.next= node;
     }
+
+    
+
+
+        
+
     //display
     public void display(){
         Node temp = head;
