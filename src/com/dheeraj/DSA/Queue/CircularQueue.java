@@ -1,60 +1,61 @@
 package com.dheeraj.DSA.Queue;
 
 public class CircularQueue {
-    protected int[] data;
+    private int[] arr;
+    private int front, rear;
     private int size;
 
-    protected int front=0,end =0;
-
-    private static final int DEFUALT_SIZE = 10;
-
-    public CircularQueue() {
-        this(DEFUALT_SIZE);
-    }
-    public CircularQueue(int size) {
-        this.data = new int[size];
+    public CircularQueue(int capacity) {
+        arr = new int[capacity];
+        front = 0;
+        rear = 0;
     }
 
-    public boolean isFull(){
-        return size == data.length;
-    }
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public void add(int val) throws Exception{
-        if(isFull()){
-            throw new Exception("Queue Is Full!");
+    public boolean isFull() {
+        return size == arr.length;
+    }
+
+    public void enqueue(int val) {
+        if (isFull()) {
+            System.out.println("Queue is full");
+            return;
         }
-        data[end++] = val;
-        end = end % data.length;
+        arr[rear] = val;
+        rear = (rear + 1) % arr.length;
         size++;
     }
 
-    public int remove() throws Exception{
-        if(isEmpty()){
-            throw new Exception("Queue is Empty");
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is Empty");
+            return -1;
         }
-        int removeVal = data[front++];
-        front = front % data.length;
+        int val = arr[front];
+        front = (front + 1) % arr.length;
         size--;
-        return removeVal;
+        return val;
     }
 
-    public int fornt() throws Exception{
-        if(isEmpty()){
-            throw new Exception("Queue is Empty");
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is Empty");
+            return -1;
         }
-        return data[front];
+        return arr[front];
     }
 
-    public void display(){
-        int i= front;
-        do{
-            System.out.print(data[i]+" ");
-            i++;
-            i %= data.length;
-        }while(i != end);
+    public void display() {
+        for (int i = front; i < front + size; i++) {
+            System.out.print(arr[i % arr.length] + " ");
+        }
+        System.out.println();
     }
+
+
+
 
 }

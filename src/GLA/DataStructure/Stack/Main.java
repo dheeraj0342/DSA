@@ -10,12 +10,9 @@ public class Main {
 //        System.out.println(st.peek());
 
             StackSUingll st = new StackSUingll();
-            st.push(2);
-            st.push(3);
-            st.push(4);
             st.pop();
-        System.out.println(st.peek()) ;
-        st.display();
+            System.out.println(st.peek()) ;
+            st.display();
 
 
     }

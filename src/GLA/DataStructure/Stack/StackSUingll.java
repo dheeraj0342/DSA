@@ -15,18 +15,6 @@ public class StackSUingll {
 
         class LinkedList {
             private Node head;
-
-            public void addFirst(int data){
-               Node node = new Node(data);
-                node.next = head;
-                head = node;
-
-            }
-
-            public void deleteFirst(){
-                head = head.next;
-            }
-
         }
 
 
@@ -35,27 +23,41 @@ public class StackSUingll {
     public StackSUingll() {
         ll =  new LinkedList();
     }
-
     public void push(int val){
-        ll.addFirst(val);
+        Node node = new Node(val);
+        node.next = ll.head;
+        ll.head = node;
+    }
+    public boolean isEmpty(){
+
+        return ll.head == null;
     }
 
-    public void pop(){
-        ll.deleteFirst();
+
+    public int pop(){
+        if(isEmpty()){
+            System.out.println("stack is Empty");
+            return 0;
+        }
+        int val = ll.head.val;
+        ll.head = ll.head.next;
+        return val;
+
     }
 
     public int peek(){
+        if(isEmpty()){
+            System.out.println("stack is Empty");
+            return -1;
+        }
         return ll.head.val;
     }
 
-    public boolean isEmpty(){
-        return ll.head == null;
-    }
 
     public void display(){
         Node temp = ll.head;
         while(temp!=null){
-            System.out.println(temp.val);
+            System.out.print(temp.val+" ");
             temp = temp.next;
         }
     }

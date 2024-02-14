@@ -1,37 +1,47 @@
 package com.dheeraj.DSA.Queue;
 
-import com.dheeraj.DSA.Stack.DynamicStack;
+import java.util.Stack;
 
-public class Main{
-    public static void main(String[] args)throws Exception {
-//        CustomQueue queue = new CustomQueue();
-//        queue.add(5);
-//        queue.add(6);
-//        queue.add(7);
-//        queue.add(8);
-//        queue.remove();
+public class Main {
+    public static void main(String[] args) {
+//        QueueUsingArray queue = new QueueUsingArray(10);
+//        queue.enqueue(12);
 //        queue.display();
-//
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.peek());
+
+
+//        QueueUsingLinkedList queue = new QueueUsingLinkedList();
+//        queue.enqueue(12);
+//        queue.enqueue(13);
+//        queue.enqueue(14);
+//        queue.display();
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.peek());
+//        queue.display();
+
+
 //        CircularQueue queue = new CircularQueue(5);
-//        queue.add(5);
-//        queue.add(6);
-//        queue.add(7);
-//        queue.add(8);
-//        queue.add(9);
-//        queue.remove();
-//        queue.add(10);
+//        queue.enqueue(12);
+//        queue.enqueue(13);
+//        queue.enqueue(14);
+//        queue.enqueue(15);
+//        queue.enqueue(16);
 //        queue.display();
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.dequeue());
+//        System.out.println(queue.peek());
 
-        DynamicQueue queue = new DynamicQueue(5);
-        queue.add(5);
-        queue.add(6);
-        queue.add(7);
-        queue.add(8);
-        queue.add(9);
-        queue.remove();
-        queue.add(10);
-        queue.add(11);
-        queue.display();
+        Stack<Integer> st = new Stack<>();
+        st.isEmpty();
+        st.push(8);
 
     }
+
+
+
+
 }
