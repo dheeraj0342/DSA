@@ -16,97 +16,116 @@ public class Dequeue {
         return front==(rear+1)% items.length;
     }
 
-    public Integer frontValue(){
-        if(isEmpty()){
-            return null;
-        }
-        return items[front];
-    }
-    public Integer rearValue(){
-        if(isEmpty()){
-            return null;
-        }
-        return items[rear];
-    }
-    public boolean insertAtFront(Integer data){
+    public boolean insertFront(int val){
         if(isFull()){
+            System.out.println("Dequeue is Full");
             return false;
         }
         if(isEmpty()){
-            front = rear = 0;
-            items[front] = data;
-            return true;
-        }
-        if(front<1){
-            front = items.length - 1;
-        }else {
+            front=rear=0;
+        }else if(front==0){
+            front=items.length-1;
+        }else{
             front--;
         }
-        items[front] = data;
+        items[front]=val;
         return true;
     }
-    public Integer deleteAtFront(){
+
+    public boolean insertRear(int val){
+        if(isFull()){
+            System.out.println("Dequeue is Full");
+            return false;
+        }
         if(isEmpty()){
+            front=rear=0;
+        }else if(rear==items.length-1){
+            rear=0;
+        }else{
+            rear++;
+        }
+        items[rear]=val;
+        return true;
+    }
+
+    public Integer deleteFront(){
+        if(isEmpty()){
+            System.out.println("Dequeue is Empty");
             return null;
         }
-        if(front == rear){
-            Integer val = items[front];
-            front = rear = -1;
-            return val;
+        Integer val=items[front];
+        if(front==rear){
+            front=rear=-1;
+        } else if (front==items.length-1) {
+           front=0;
+        } else{
+            front++;
         }
-        Integer val = items[front];
-        front = (front + 1) % items.length;
         return val;
     }
 
-    public Integer deleteAtRear(){
+    public Integer deleteRear(){
         if(isEmpty()){
+            System.out.println("Dequeue is Empty");
             return null;
         }
-
-        if(front == rear){
-            Integer val = items[rear];
-            front = rear = -1;
-            return val;
-        }
-        Integer val = items[rear];
-        if(rear < 1){
-            rear = items.length-1;
-        }
-        else {
+        Integer val=items[rear];
+        if(front==rear){
+            front=rear=-1;
+        }else if(rear==0){
+            rear=items.length-1;
+        }else{
             rear--;
         }
         return val;
     }
-    public boolean insertAtRear(Integer data) {
-        if (isFull()) {
-            return false;
-        }
 
-        if (isEmpty()) {
-            front = rear = 0;
-        } else {
-            rear = (rear + 1) % items.length;
+    public Integer getFront(){
+        if(isEmpty()){
+            System.out.println("Dequeue is Empty");
+            return null;
         }
-
-        items[rear] = data;
-        return true;
+        return items[front];
     }
-    public void display() {
-        if (isEmpty()) {
+
+    public Integer getRear(){
+        if(isEmpty()){
+            System.out.println("Dequeue is Empty");
+            return null;
+        }
+        return items[rear];
+    }
+
+    public void display(){
+        if(isEmpty()){
+            System.out.println("Dequeue is Empty");
             return;
         }
-
-        int i = front;
-        while (true) {
-            System.out.print(items[i] + " ");
-            if (i == rear) {
-                break;
-            }
-            i = (i + 1) % items.length;
-        }
-        System.out.println();
+        int i =front;
+      while(i!=rear){
+          System.out.print(items[i]+" ");
+          i=(i+1)%items.length;
+      }
+        System.out.println(items[rear]);
     }
+
+public static void main(String[] args) {
+        Dequeue dequeue = new Dequeue(5);
+        dequeue.insertFront(1);
+        dequeue.insertFront(2);
+        dequeue.insertRear(3);
+        dequeue.insertRear(4);
+        dequeue.display();
+         System.out.println(dequeue.deleteFront());
+
+        dequeue.deleteRear();
+        dequeue.display();
+        dequeue.insertFront(5);
+        dequeue.insertRear(6);
+        dequeue.display();
+    }
+
+
 
 
 }

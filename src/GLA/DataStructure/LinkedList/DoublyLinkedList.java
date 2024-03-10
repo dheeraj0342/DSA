@@ -45,7 +45,6 @@ public void insertAtEnd(int data) {
 
     public void insertAtStart(int data) {
         Node node = new Node(data);
-
         if (head == null) {
             head = tail = node;
         } else {
@@ -98,6 +97,7 @@ public void insertAtEnd(int data) {
         }
         if(head.next ==null){
             head=null;
+            tail=null;
             return ;
         }
         Node fast = head,slow = head;

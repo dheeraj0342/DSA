@@ -65,4 +65,47 @@ public class CircularLinkedList {
         return slow;
     }
 
+    public void deleteFirst() throws Exception {
+        if(head == null)
+            throw new Exception("List is empty");
+        if(head.next == head){
+            head = null;
+            return;
+        }
+        Node temp = head;
+        while(temp.next!=head){
+            temp = temp.next;
+        }
+        temp.next = head.next;
+        head = head.next;
+    }
+
+    public void deleteLast() throws Exception {
+        if(head == null)
+            throw new Exception("List is empty");
+        if(head.next == head){
+            head = null;
+            return;
+        }
+        Node temp = head;
+        while(temp.next.next!=head){
+            temp = temp.next;
+        }
+        temp.next = head;
+    }
+
+    public void delete(int index) throws Exception {
+        if(head == null)
+            throw new Exception("List is empty");
+        if(index == 0){
+            deleteFirst();
+            return;
+        }
+        Node temp = head;
+        for(int i=0;i<index-1;i++){
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+    }
+
 }

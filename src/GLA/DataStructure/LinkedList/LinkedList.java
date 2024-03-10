@@ -1,76 +1,174 @@
 package GLA.DataStructure.LinkedList;
 
-public class LinkedList {
-    class Node{
-       int val;
-       Node next;
+class Node {
 
-        Node (int val){
-            this.val = val;
-        }
+    private String data;
+    private Node next;
+
+    public Node(String data) {
+        this.data = data;
     }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setNext(Node node) {
+        this.next = node;
+    }
+
+    public String getData() {
+        return this.data;
+    }
+
+    public Node getNext() {
+        return this.next;
+    }
+}
+
+
+class LinkedList {
 
     private Node head;
-    private int size;
+    private Node tail;
 
-    //addLast
-    public void addLast(int data){
-        if(head == null) head = new Node(data);
-        else{
-            Node temp = head;
-            while(temp.next != null){
-                temp= temp.next;
-            }
-            temp.next = new Node(data);
-        }
-        size++;
+    public Node getHead() {
+        return this.head;
     }
 
-    public void addFirst(int data){
-            Node node = new Node(data);
-            node.next = head;
-            head = node;
-
+    public Node getTail() {
+        return this.tail;
     }
 
-    public void add(int data , int index){
-        Node temp = head;
-        if(index ==0){
-            addFirst(data);
-            return;
-        }
-        if(index == size) {
-            addLast(data);
-            return;
-        }
-        for (int i = 0; i <index-1; i++) {
-            temp = temp.next;
-        }
+    public void addAtEnd(String data) {
         Node node = new Node(data);
-        node.next = temp.next;
-        temp.next= node;
-    }
 
-    
+        if (this.head == null) {
+            this.head = this.tail = node;
+        } else {
+            this.tail.setNext(node);
 
-
-        
-
-    //display
-    public void display(){
-        Node temp = head;
-        while(temp!= null){
-            System.out.print(temp.val+"->");
-            temp = temp.next;
+            this.tail = node;
         }
-        System.out.println("null");
     }
 
-    // size
-    public int size(){
-       return size;
+    public void addAtBeginning(String data) {
+        Node node = new Node(data);
+
+        if (this.head == null) {
+            this.head = this.tail = node;
+        }
+
+        else {
+            node.setNext(this.head);
+            this.head = node;
+        }
     }
 
+    public void display() {
+        Node temp = this.head;
+
+        while (temp != null) {
+            System.out.println(temp.getData());
+            temp = temp.getNext();
+        }
+    }
+
+    public Node find(String data) {
+        Node temp = this.head;
+
+        while (temp != null) {
+            if (temp.getData().equals(data))
+                return temp;
+            temp = temp.getNext();
+        }
+        return null;
+    }
+
+    public void insert(String data, String dataBefore) {
+        Node node = new Node(data);
+
+        if (this.head == null)
+            this.head = this.tail = node;
+        else {
+            Node nodeBefore = this.find(dataBefore);
+            if (nodeBefore != null) {
+                node.setNext(nodeBefore.getNext());
+                nodeBefore.setNext(node);
+                if (nodeBefore == this.tail)
+                    this.tail = node;
+            }
+            else
+                System.out.println("Node not found");
+        }
+    }
+
+    public void delete(String data) {
+
+        if (this.head == null)
+            System.out.println("List is empty");
+        else {
+            Node node = this.find(data);
+
+            if (node == null)
+                System.out.println("Node not found");
+
+            if (node == this.head) {
+                this.head = this.head.getNext();
+                node.setNext(null);
+
+                if (node == this.tail)
+                    tail = null;
+            }
+            else {
+                Node nodeBefore = null;
+                Node temp = this.head;
+                while (temp != null) {
+                    if (temp.getNext() == node) {
+                        nodeBefore = temp;
+                        break;
+                    }
+                    temp = temp.getNext();
+                }
+
+                nodeBefore.setNext(node.getNext());
+
+                if (node == this.tail)
+                    this.tail = nodeBefore;
+                node.setNext(null);
+            }
+        }
+    }
+}
 
 
+class Tester {
+
+    public static void main(String args[]) {
+
+        LinkedList linkedList = new LinkedList();
+        LinkedList reversedLinkedList = new LinkedList();
+
+        linkedList.addAtEnd("Data");
+        linkedList.addAtEnd("Structures");
+        linkedList.addAtEnd("and");
+        linkedList.addAtEnd("Algorithms");
+
+        System.out.println("Initial List");
+        linkedList.display();
+
+        System.out.println();
+
+        reverseList(linkedList.getHead(), reversedLinkedList);
+        System.out.println("Reversed List");
+        reversedLinkedList.display();
+    }
+
+    public static void reverseList(Node head, LinkedList reversedLinkedList) {
+        if (head == null) {
+            return;
+        }
+        reverseList(head.getNext(), reversedLinkedList);
+        reversedLinkedList.addAtEnd(head.getData());
+    }
 }

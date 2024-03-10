@@ -4,8 +4,12 @@ import java.util.*;
 
 public class leetcode {
     public static void main(String[] args) {
-        int[] arr ={1,2,2};
-        System.out.println(leetcode(arr));
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(2);
+        ans.add(3);
+        System.out.println(ans);
+        System.out.println(ans.indexOf(2));
+
     }
     public static List<List<Integer>> leetcode(int[] nums){
         List<List<Integer>> result = new ArrayList<>();
