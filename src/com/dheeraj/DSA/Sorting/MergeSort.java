@@ -1,5 +1,6 @@
 package com.dheeraj.DSA.Sorting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 // Time Complexity : O(NlogN)
@@ -8,54 +9,46 @@ public class MergeSort {
     public static void main(String[] args) {
         int [] arr ={9,8,7,3,6,4,15,0,10};
         int n =arr.length;
-        sort(arr,0,n-1);
+        mergeSort(arr,0,n-1);
         System.out.println(Arrays.toString(arr));
     }
 
-    public static void sort(int[] arr , int start , int end){
-        if(start == end){
+    public static void mergeSort(int[] arr , int low , int high){
+        if(low >= high)
             return;
-        }
-        int mid = (start + end)/2;
-        sort(arr,start,mid);
-        sort(arr,mid+1,end);
-        merge(arr,start,mid,end);
+        int mid = (low+high)/2;
+        mergeSort(arr,low,mid);
+        mergeSort(arr,mid+1,high);
+        mergeArray(arr,low,mid,high);
     }
-    public static void merge(int[] arr,int start, int mid , int end){
-        int i=0,j=0;
-        int n = mid-start+1;
-        int m = end - mid;
-        int [] left = new int[n];
-        int[] right = new int[m];
-
-        for (int k = 0; k < n; k++) {
-            left[k] = arr[start+k];
-        }
-        for (int k = 0; k < m; k++) {
-            right[k] = arr[mid+1+k];
-        }
-        int k=start;
-        while(i<n && j<m){
-            if(left[i] < right[j]){
-                arr[k] = left[i];
-                i++;
+    public static void mergeArray(int[] arr , int low , int mid , int high){
+        int n = arr.length;
+        ArrayList<Integer> temp = new ArrayList<>();
+        int left = low;
+        int right = mid+1;
+        while(left <= mid && right <= high){
+            if(arr[left] <= arr[right]){
+                temp.add(arr[left]);
+                left++;
             }
             else{
-                arr[k] = right[j];
-                j++;
+                temp.add(arr[right]);
+                right++;
             }
-            k++;
         }
-        while(i<n){
-            arr[k] = left[i];
-            i++;
-            k++;
+        while(left <= mid){
+            temp.add(arr[left]);
+            left++;
         }
-        while(j<m){
-            arr[k] = right[j];
-            j++;
-            k++;
+        while (right <= high){
+            temp.add(arr[right]);
+            right++;
+        }
+
+        for (int i = low; i <=high ; i++) {
+            arr[i] = temp.get(i-low);
         }
     }
-
 }
+
+
