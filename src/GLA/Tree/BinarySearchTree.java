@@ -1,5 +1,9 @@
 package GLA.Tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
+
 public class BinarySearchTree {
 
     class Node {
@@ -13,18 +17,49 @@ public class BinarySearchTree {
         }
     }
 
-    // recurssive
-    public Node insert(Node root , int data) {
-        if (root == null) {
+
+    public Node insert(Node node , int data) {
+        if (node == null) {
             return new Node(data);
         }
-        if (data < root.data) {
-            root.left = insert(root.left, data);
+        if (data < node.data) {
+            node.left = insert(node.left, data);
         } else {
-            root.right = insert(root.right, data);
+            node.right = insert(node.right, data);
         }
-        return root;
+        return node;
     }
+
+    public boolean search(Node node , int data){
+        if(node == null)
+            return false;
+        if(node.data == data)
+            return true;
+        if(data < node.data)
+            return search(node.left,data);
+        else
+            return search(node.right,data);
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree bst = new BinarySearchTree();
+        Node root = bst.new Node(25);
+        bst.insertIterative(root,10);
+        bst.insertIterative(root,15);
+        bst.insertIterative(root,32);
+        bst.insertIterative(root,35);
+        bst.PreOrderIterative(root);
+        System.out.println();
+        System.out.println(bst.search(root,20));
+
+
+    }
+
+
+
+
+
+
 
         // iterative
     public void insertIterative(Node root , int data){
@@ -51,6 +86,19 @@ public class BinarySearchTree {
         }
     }
 
+
+    public boolean searchIterative(Node root , int data){
+        Node current = root;
+        while(current!=null){
+            if(current.data == data)
+                return true;
+            else if(data < current.data)
+                current = current.left;
+            else
+                current = current.right;
+        }
+        return false;
+    }
     public static void inorder(Node root){
         if(root == null)
             return;
@@ -75,36 +123,97 @@ public class BinarySearchTree {
         System.out.print(root.data+" ");
     }
 
-    public boolean search(Node root, int data){
+
+
+    public void PreOrderIterative(Node root){
         if(root == null)
-            return false;
-        if(root.data == data)
-            return true;
-        return search(root.left,data) || search(root.right,data);
-    }
-    public boolean searchIterative(Node root , int data){
-        Node current = root;
-        while(current!=null){
-            if(current.data == data)
-                return true;
-            else if(data < current.data)
-                current = current.left;
-            else
-                current = current.right;
+            return;
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node temp = stack.pop();
+            System.out.print(temp.data+" ");
+            if(temp.right!=null)
+                stack.push(temp.right);
+            if(temp.left!=null)
+                stack.push(temp.left);
         }
-        return false;
     }
 
-    public static void main(String[] args) {
-        BinarySearchTree bst = new BinarySearchTree();
-        Node root = bst.new Node(25);
-        bst.insert(root,10);
-        bst.insert(root,15);
-        bst.insert(root,30);
-        bst.insert(root,35);
-        System.out.println(bst.search(root,15));
-        inorder(root);
-
-
+    public void InOrderIterative(Node root){
+        if(root == null)
+            return;
+        Stack<Node> stack = new Stack<>();
+        Node temp = root;
+        while(true){
+            if(temp!=null){
+                stack.push(temp);
+                temp=temp.left;
+            }
+            else{
+                if(stack.isEmpty())
+                    break;
+                temp = stack.pop();
+                System.out.print(temp.data+" ");
+                temp=temp.right;
+            }
+        }
     }
+
+    public void PostOrderIterative(Node root) {
+        if (root == null)
+            return;
+        Stack<Node> stack1 = new Stack<>();
+        Stack<Node> stack2 = new Stack<>();
+        stack1.push(root);
+        while (!stack1.isEmpty()) {
+            Node temp = stack1.pop();
+            stack2.push(temp);
+            if (temp.left != null) stack1.push(temp.left);
+            if (temp.right != null) stack2.push(temp.right);
+        }
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().data + " ");
+        }
+    }
+
+    public static Node successor(Node node){
+        if(node!= null && node.right!=null){
+            node = node.right;
+            while(node !=null){
+                node = node.left;
+            }
+        }
+        return node;
+    }
+    public static Node delete(Node node,int val){
+        if(node ==null){
+            return null;
+        }
+        if(val < node.data){
+            node.left = delete(node.left,val);
+        }
+        else if(val > node.data){
+            node.right = delete(node.right,val);
+        }
+        else{
+            if(node.left == null && node.right ==null){
+                node = null;
+            }
+            else if(node.left == null){
+                node = node.right;
+            }
+            else if(node.right == null){
+                node = node.right;
+            }
+            else{
+                Node successor = successor(node);
+                node.data = successor.data;
+                node.right = delete(node.right,successor.data);
+            }
+        }
+        return node;
+    }
+
+
 }
