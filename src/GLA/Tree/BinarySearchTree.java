@@ -48,7 +48,9 @@ public class BinarySearchTree {
         bst.insertIterative(root,15);
         bst.insertIterative(root,32);
         bst.insertIterative(root,35);
-        bst.PreOrderIterative(root);
+        ArrayList<Integer> list = new ArrayList<>();
+        inorder(root,list);
+        System.out.println(list);
         System.out.println();
         System.out.println(bst.search(root,20));
 
@@ -84,6 +86,14 @@ public class BinarySearchTree {
         else{
             parent.right = temp;
         }
+    }
+    public static ArrayList<Integer> inorder(Node node , ArrayList<Integer> list){
+        if(node !=null){
+            inorder(node.left,list);
+            list.add(node.data);
+            inorder(node.right,list);
+        }
+        return list;
     }
 
 
