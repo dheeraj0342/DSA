@@ -8,6 +8,8 @@ import java.util.Arrays;
 // worst case :
 // -> Time Complexity : O(N^2)
 // -> Space Complexity :O(N)
+
+
 public class QuickSort {
     public static void main(String[] args) {
         int[] arr ={3,1,7,8,0,-1,-3};
@@ -22,7 +24,7 @@ public class QuickSort {
         }
     }
     public static int findParition(int[] arr ,int low , int high){
-        int pivot = low;
+        int pivot = high;
         int i=low;
         int j=high;
         while(i<j){
@@ -36,6 +38,7 @@ public class QuickSort {
         }
         swap(arr,pivot,j);
         return j;
+
 
     }
 

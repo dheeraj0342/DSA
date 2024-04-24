@@ -57,12 +57,6 @@ public class BinarySearchTree {
 
     }
 
-
-
-
-
-
-
         // iterative
     public void insertIterative(Node root , int data){
         Node temp = new Node(data);

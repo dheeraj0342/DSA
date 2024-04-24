@@ -20,5 +20,8 @@ public class Threater {
             m = m/a +1;
         ans = n*m;
         System.out.println(ans);
+        StringBuilder sb = new StringBuilder("dheeraj");
+        sb.append(".b");
+        System.out.println(sb);
     }
 }
