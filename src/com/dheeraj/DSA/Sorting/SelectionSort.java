@@ -7,16 +7,16 @@ public class SelectionSort {
     public static void main(String[] args) {
         int [] arr = {1,6,3,2,4};
         int n = arr.length;
-        for(int i=n-1;i>=0;i--){
-            int maxId=0;
-            for (int j = 1; j <=i ; j++) {
-                if (arr[j] > arr[maxId]) {
-                    maxId =j;
+        for(int i=0;i<n;i++){
+            int min =i;
+            for(int j=i+1;j<n;j++){
+                if(arr[j] < arr[min]){
+                    min =j;
                 }
-                int temp = arr[i];
-                arr[i] = arr[maxId];
-                arr[maxId] = temp;
             }
+            int temp = arr[min];
+            arr[min] = arr[i];
+            arr[i] = temp;
         }
         System.out.println(Arrays.toString(arr));
     }
