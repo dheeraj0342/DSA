@@ -2,7 +2,7 @@ package com.dheeraj.DSA.Recursion;
 
 public class GenerateParenthesis {
     public static void main(String[] args) {
-    printParenthesis(3,0,0,"");
+    printParenthesis(2,0,0,"");
     }
     // recurssion code to print valid parenthesis
     public static void printParenthesis(int n,int open , int close , String op){

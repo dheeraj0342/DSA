@@ -29,9 +29,8 @@ public class ConstructBinaryTree {
         Integer[] arr = {50,25,12,null,null,37,30,null,null,null,75,62,null,70,null,null,87,null,null};
         Node root = new Node(arr[0],null,null);
         construct(root,arr);
+        System.out.println(MorrisInorderTraversal.morrisInorderTraversal(root));
 
-
-        Klevel.klvl(root,2);
         }
     public static void construct(Node root,Integer[] arr) {
         Stack<Pair> st = new Stack<>();
