@@ -26,18 +26,18 @@ public class QuickSort {
     public static int findParition(int[] arr ,int low , int high){
         int pivot = high;
         int i=low;
-        int j=high;
-        while(i<j){
-            while(arr[i] <= arr[pivot] && i<=high-1)
-                i++;
-            while(arr[j] > arr[pivot] && j >=low+1)
-                j--;
-            if(i<j){
-                swap(arr,i,j);
-            }
+        int j=low;
+        while(i<= high){
+           if(arr[i] <= arr[pivot]){
+               swap(arr,i,j);
+               i++;
+               j++;
+           }else{
+               i++;
+           }
         }
-        swap(arr,pivot,j);
-        return j;
+
+        return j-1;
 
 
     }

@@ -1,10 +1,8 @@
 package com.dheeraj.DSA.LinkedList;
 
-
 import java.util.Scanner;
 
-public class ReverseLinkedList {
-
+public class MidNode {
     static class ListNode{
         int val;
         ListNode next;
@@ -25,27 +23,26 @@ public class ReverseLinkedList {
             prev.next = new ListNode(scn.nextInt());
             prev = prev.next;
         }
-        ListNode head = reverse(dummy.next);
-        while(head != null){
-            System.out.print(head.val +"-> ");
-            head = head.next;
+        ListNode head = midNode(dummy.next);
+        if(head ==null){
+            System.out.println("null");
+        }else{
+            System.out.println(head.val);
         }
+
     }
 
-    public static ListNode reverse(ListNode head){
-        if(head == null || head.next == null) return head;
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode forw = null;
+    public static ListNode midNode(ListNode head){
+        if(head==null || head.next ==null) return head;
 
-        while(curr != null){
-            forw = curr.next;
+        ListNode slow = head;
+        ListNode fast = head;
 
-            curr.next = prev;
-
-            prev = curr;
-            curr = forw;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return prev;
+        return slow;
+
     }
 }
